@@ -253,5 +253,37 @@ files:
         CoffeeMachineTest('machine.coffee_machine').run_tests()
   learner_created: false
 feedback_link: https://hyperskill.org/projects/68/stages/370/implement#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: |-
+    Exception in test #1
+
+    Traceback (most recent call last):
+      File "coffee_machine.py", line 113, in <module>
+        main()
+      File "coffee_machine.py", line 110, in main
+        action_choice()
+      File "coffee_machine.py", line 30, in action_choice
+        fill_list.apppend(int(input('Write how many ml of milk you want to add:')) * -1)
+    AttributeError: 'list' object has no attribute 'apppend'
+
+    Please find below the output of your program during this failed test.
+    Note that the '>' character indicates the beginning of the input line.
+
+    ---
+
+    Write action (buy, fill, take, remaining, exit): > remaining
+    The coffee machine has:
+    400 of water
+    540 of milk
+    120 of coffee beans
+    9 of disposable cups
+    550 of money
+    Write action (buy, fill, take, remaining, exit): > buy
+    What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu: > 2
+    Write action (buy, fill, take, remaining, exit): > buy
+    What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu: > 2
+    Write action (buy, fill, take, remaining, exit): > fill
+    Write how many ml of water you want to add:> 1000
+  time: Mon, 30 Aug 2021 18:49:41 UTC
 record: -1
