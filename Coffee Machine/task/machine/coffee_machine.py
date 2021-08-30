@@ -1,31 +1,65 @@
-print('Write how many ml of water the coffee machine has:')
-has_water = int(input())
-print('Write how many ml of milk the coffee machine has:')
-has_milk = int(input())
-print('Write how many grams of coffee beans the coffe machine has:')
-has_beans = int(input())
-print('Write how many cups of coffee you will need:')
-cups_needed = int(input())
+machine_supply = {'water': 400, 'milk': 540, 'beans': 120, 'cups': 9, 'cash': 550}
 
-water = 200
-milk = 50
-beans = 15
 
-water_for_cups = int(has_water / water)
-milk_for_cups = int(has_milk / milk)
-beans_for_cups = int(has_beans / beans)
+def coffee_machine_status(machine_supply):
+    print('The coffee machine has:\n{} of water\n{} of milk\n'
+          '{} of coffee beans\n{} of disposable cups\n{} of money'.format(machine_supply['water'],
+                                                                          machine_supply['milk'],
+                                                                          machine_supply['beans'],
+                                                                          machine_supply['cups'],
+                                                                          machine_supply['cash']))
 
-can_do_cups = []
-can_do_cups.append(water_for_cups)
-can_do_cups.append(milk_for_cups)
-can_do_cups.append(beans_for_cups)
-how_many = 10000
-for x in can_do_cups:
-      if x < how_many:
-            how_many = x
-if how_many > cups_needed:
-      print('Yes, I can make that amount of coffee (and even {} more than that)'.format(how_many - cups_needed))
-elif how_many == cups_needed:
-      print('Yes, I can make that amount of coffee')
-else:
-      print('No, I can make only {} cups of coffe'.format(how_many))
+
+def substract_supply(supply, water, milk, beans, cups, cash):
+    supply['water'] -= water
+    supply['milk'] -= milk
+    supply['beans'] -= beans
+    supply['cups'] -= cups
+    supply['cash'] += cash
+
+
+def action_choice():
+    while True:
+        action = input('Write action (buy, fill, take, remaining, exit): ')
+        if action == 'buy':
+            buy_action(machine_supply)
+        elif action == 'fill':
+            w_to_fill = int(input('Write how many ml of water you want to add:'))
+            m_to_fill = int(input('Write how many ml of milk you want to add:'))
+            b_to_fill = int(input('Write how many grams of beans you want to add:'))
+            c_to_fill = int(input('Write how many disposable cups you want to add:'))
+            substract_supply(machine_supply, (w_to_fill * -1), (m_to_fill * -1), (b_to_fill * -1), (c_to_fill * -1), 0)
+        elif action == 'take':
+            print('I gave you ${}'.format(machine_supply['cash']))
+            machine_supply['cash'] = 0
+        elif action == 'remaining':
+            coffee_machine_status(machine_supply)
+        elif action == 'exit':
+            break
+        else:
+            print('Chose wrong action')
+
+#  implement checking if there is enough resources to make coffee
+def check_supply():
+    pass
+
+
+def buy_action(supply):
+    choice = input('What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu: ')
+    if choice == '1':
+        substract_supply(supply, 250, 0, 16, 1, 4)
+    elif choice == '2':
+        substract_supply(supply, 350, 75, 20, 1, 7)
+    elif choice == '3':
+        substract_supply(supply, 200, 100, 12, 1, 6)
+    elif choice == 'back':
+        return False
+    else:
+        print('We don\'t serve what you ordered')
+
+
+def main():
+    action_choice()
+
+
+main()
