@@ -27,7 +27,7 @@ def action_choice():
         elif action == 'fill':
             fill_list = []
             fill_list.append(int(input('Write how many ml of water you want to add:')) * -1)
-            fill_list.apppend(int(input('Write how many ml of milk you want to add:')) * -1)
+            fill_list.append(int(input('Write how many ml of milk you want to add:')) * -1)
             fill_list.append(int(input('Write how many grams of beans you want to add:')) * -1)
             fill_list.append(int(input('Write how many disposable cups you want to add:')) * -1)
             fill_list.append(0)
@@ -97,9 +97,19 @@ def buy_action(supply):
         else:
             print('Not enough')
     elif choice == '2':
-        substract_supply(supply, ammount_for_coffee(choice))
+        check = check_supply(choice)
+        if check == 1:
+            substract_supply(supply, ammount_for_coffee(choice))
+            print('I have enough resources, making you a coffee!')
+        else:
+            print('Not enough')
     elif choice == '3':
-        substract_supply(supply, ammount_for_coffee(choice))
+        check = check_supply(choice)
+        if check == 1:
+            substract_supply(supply, ammount_for_coffee(choice))
+            print('I have enough resources, making you a coffee!')
+        else:
+            print('Not enough')
     elif choice == 'back':
         return False
     else:
